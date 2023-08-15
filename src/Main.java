@@ -24,65 +24,38 @@ class InputLayer {
     public InputLayer() {
         this.queue = new LinkedList<>();
     }
-    //create a method that takes a string parameter and creates a message object from it
     public Message createMessage(String input) {
-        //check if the input is null or empty, and throw an exception if so
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException("Input cannot be null or empty");
         }
-        //check if the input length is more than 250 characters, and throw an exception if so
         if (input.length() > 250) {
             throw new IllegalArgumentException("Input cannot be more than 250 characters");
         }
-        //create a message object with the input as the content
         Message message = new Message(input);
-        //return the message object
         return message;
     }
-    //create a method that takes a message object and adds it to the queue
     public void enqueueMessage(Message message) {
-        //check if the message is null, and throw an exception if so
         if (message == null) {
             throw new IllegalArgumentException("Message cannot be null");
         }
-        //add the message to the queue
         this.queue.add(message);
     }
-    //create a method that returns and removes the first message from the queue
     public Message dequeueMessage() {
-        //check if the queue is empty, and throw an exception if so
         if (this.queue.isEmpty()) {
             throw new NoSuchElementException("Queue is empty");
         }
-        //return and remove the first message from the queue
         return this.queue.remove();
-    }
-
-    //create a method that returns but does not remove the first message from the queue
-    public Message peekMessage() {
-        //check if the queue is empty, and throw an exception if so
-        if (this.queue.isEmpty()) {
-            throw new NoSuchElementException("Queue is empty");
-        }
-        //return but do not remove the first message from the queue
-        return this.queue.peek();
     }
 }
 
 //create a class for the processing layer
 class ProcessingLayer {
-    //declare a private stack field to store the messages
     private Stack<Message> stack;
-
-    //declare a private arraylist field to store the messages that have been sent
     private ArrayList<Message> sentMessages;
-
-    //create a constructor that initializes the stack and the arraylist fields
     public ProcessingLayer() {
         this.stack = new Stack<>();
         this.sentMessages = new ArrayList<>();
     }
-
     //create a method that takes a message object and pushes it to the stack
     public void pushMessage(Message message) {
         //check if the message is null, and throw an exception if so
@@ -92,7 +65,6 @@ class ProcessingLayer {
         //push the message to the stack
         this.stack.push(message);
     }
-
     //create a method that returns and pops the top message from the stack
     public Message popMessage() {
         //check if the stack is empty, and throw an exception if so
@@ -102,17 +74,6 @@ class ProcessingLayer {
         //return and pop the top message from the stack
         return this.stack.pop();
     }
-
-    //create a method that returns but does not pop the top message from the stack
-    public Message peekMessage() {
-        //check if the stack is empty, and throw an exception if so
-        if (this.stack.isEmpty()) {
-            throw new EmptyStackException();
-        }
-        //return but do not pop the top message from the stack
-        return this.stack.peek();
-    }
-
     //create a method that prints the message content to the console and adds it to the sent messages list
     public void printMessage(Message message) {
         //check if the message is null, and throw an exception if so
